@@ -1,16 +1,103 @@
-# React + Vite
+# 🖥️ 이수연 님을 위한 개인 맞춤형 글래스모피즘 대시보드 (Personal Dashboard)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React와 Vite, 그리고 순수 **Vanilla CSS**를 활용해 제작된 프리미엄 개인용 대시보드 웹 애플리케이션입니다.  
+글래스모피즘(Glassmorphism) 스타일의 카드 디자인과 부드러운 그라디언트 로테이션 배경, 그리고 다양한 유틸리티 위젯을 제공합니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ 주요 기능 및 특징
 
-## React Compiler
+### 1. 🎨 동적 테마 및 프리미엄 비주얼
+- **3가지 글로벌 테마 제공**:
+  - 💛 **Yellow 테마 (기본)**: 따뜻하고 부드러운 파스텔 옐로우 & 골드 크림 그라디언트 배경 애니메이션에 **에메랄드 청록색 포인트 컬러**(`D-Day`, `Focus 타이머`, `시계 초 단위` 등)가 매칭됩니다.
+  - 💜 **Purple 테마**: 보라 ➡️ 핑크 ➡️ 남색으로 부드럽게 로테이션되는 신비롭고 몽환적인 감성 테마입니다.
+  - 💙 **Blue 테마**: 차분하고 직관적인 오션 블루 & 아쿠아 계열의 테마입니다.
+- **글래스모피즘 디자인**: 투명도가 조절된 카드와 백드롭 블러(`backdrop-filter: blur`) 효과를 사용하여 현대적이고 고급스러운 디자인을 연출하였습니다.
+- **인터랙티브 마우스 효과**: 카드를 호버할 때 부드럽게 커지거나 그림자가 퍼지는 미세 호버 효과를 탑재하였습니다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 2. 🕒 시계 & 인터랙티브 드롭다운 캘린더
+- **정밀 시계**: 초 단위까지 역동적으로 흘러가는 디지털 시계를 장착하여 시간 관리가 용이합니다.
+- **슬라이드 캘린더**: 시계 우측의 날짜 영역을 클릭하면 **슬라이드 다운 애니메이션**과 함께 해당 월의 달력이 드롭다운됩니다. 달력 외부 영역을 클릭하면 위로 부드럽게 슬라이드 업하며 닫힙니다.
+- **호버 최적화**: 달력 내부의 날짜를 호버할 때 글자가 가려지지 않고 깔끔하게 강조되도록 스케일업과 섀도우 확장 방식으로 인터랙션을 개선했습니다.
 
-## Expanding the ESLint configuration
+### 3. ✍️ 메모 및 D-Day 위젯
+- **오늘의 메모**: "오늘 할 일" 대신 심플하고 직관적인 **"메모"**라는 제목으로 텍스트를 실시간으로 간편하게 기록할 수 있습니다.
+- **일정 디데이(D-Day)**: 중요한 일정을 등록하고 디데이 카운트다운을 표시하는 카드를 제공합니다. 테마별 포인트 컬러가 자동으로 매칭됩니다.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 4. 🧠 Gemini 2.0 AI 실시간 명언 위젯
+- **실시간 AI 명언 수집**: `Gemini 2.0 Flash` API를 연동하여 매번 새로고침 시 사용자 맞춤 실시간 명언(영어 명언 + 한글 번역 + 저자 정보)을 수신해 표시합니다.
+- **로딩 피드백**: 데이터를 불러오는 동안 점멸 도트 애니메이션이 구동되어 시각적인 대기 경험을 높였습니다.
+- **예외 처리(Fallback)**: API Key가 없거나 호출 제한에 도달했을 때를 대비하여 정교하게 큐레이션된 로컬 명언 목록이 순환하며 끊김 없는 사용자 경험을 보장합니다.
+
+### 5. ⏱️ 뽀모도로 Focus 타이머
+- **집중 타이머**: 집중 시간(25분)과 휴식 시간(5분)을 순환하는 직관적인 타이머입니다. (오타 수정 완료: `FOUCS` ➡️ `FOCUS`)
+- **브라우저 자체 알림 사운드**: 타이머 완료 시 추가 음원 파일 로드 없이 **Web Audio API**를 사용해 브라우저 내에서 직접 맑고 고운 하프 비프음을 합성 재생합니다.
+
+### 6. 🌤️ 실시간 날씨 및 위치 감지 (Header)
+- **GPS 자동 감지**: 브라우저의 Geolocation API를 사용하여 현재 사용자의 실업/실외 위도와 경도를 실시간으로 가져옵니다.
+- **OpenWeatherMap API 연동**: 현재 있는 도시의 이름과 온도, 날씨 상태 아이콘, 습도, 풍속 등을 표시합니다. API 키가 등록되지 않았을 경우, 위치 기반으로 주요 도시명을 매핑해주는 폴백 기능이 동작합니다.
+
+### 7. 🎛️ 하단 컨트롤 패널 (Control Panel)
+대시보드 맨 아래에 고정되어 있으며 다음과 같은 세부 컨트롤을 지원합니다:
+- **🛠️ 레이아웃 편집**: 레이아웃 편집 모드를 켜면 모든 위젯 카드가 부드럽게 흔들리는(Floating Shake) 시각 효과가 켜지며, 전체 대시보드의 가로 단수(1단 / 2단 / 3단) 및 배치를 동적으로 변경할 수 있습니다.
+- **➕ 위젯 추가**: 카드 목록 중 표시하고 싶거나 가리고 싶은 카드를 실시간으로 켜고 끌 수 있는 깔끔한 팝업 모달이 뜹니다.
+- **⚙️ 설정**: 옐로우, 퍼플, 블루 테마 간의 전환을 수행합니다.
+- *※ 모든 변경 사항(활성 위젯, 레이아웃 크기, 활성 테마)은 브라우저의 `localStorage`에 즉시 저장되므로 사이트를 새로고침해도 그대로 유지됩니다.*
+
+---
+
+## 🛠️ 기술 스택 (Tech Stack)
+
+- **Framework**: React 19 + Vite 8
+- **Styling**: Vanilla CSS (자체 커스텀 변수 기반 테마 시스템)
+- **Icons**: `lucide-react`
+- **APIs**:
+  - Google Gemini 2.0 Flash API (AI 명언 생성)
+  - OpenWeatherMap API (실시간 위치 날씨 조회)
+  - Web Audio API (타이머 완료 오디오 합성)
+  - Geolocation API (브라우저 내장 위치 감지)
+
+---
+
+## 🚀 로컬 실행 방법 (Local Development)
+
+### 1. 패키지 설치
+```bash
+npm install
+```
+
+### 2. 환경 변수 설정
+프로젝트 루트 디렉토리에 `.env.local` 파일을 생성한 후 아래와 같이 API 키 정보를 입력해 주세요.
+```env
+# OpenWeatherMap API Key (날씨 위젯용)
+VITE_OPENWEATHER_API_KEY=your_openweathermap_api_key_here
+
+# Gemini AI API Key (실시간 AI 명언 위젯용)
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### 3. 로컬 서버 실행
+```bash
+npm run dev
+```
+
+---
+
+## 🌐 GitHub Pages 배포 설정 안내
+
+본 프로젝트는 GitHub Actions 또는 직접 빌드 방식을 통해 **GitHub Pages**로 손쉽게 호스팅할 수 있도록 이미 구성되어 있습니다.
+
+- **Vite Base 경로**:  
+  Vite 빌드 시 에셋 경로가 어긋나 404가 발생하는 현상을 방지하기 위해 [vite.config.js](file:///Users/geniusoo/Documents/Dashboard/vite.config.js) 파일의 `base` 경로가 다음과 같이 설정되어 있습니다.
+  ```javascript
+  export default defineConfig({
+    plugins: [react()],
+    base: '/Dashboard/', // GitHub 저장소 이름과 일치시킵니다.
+  })
+  ```
+- **빌드 명령어**:  
+  배포용 정적 파일을 수동 빌드할 경우 아래 명령어를 실행합니다.
+  ```bash
+  npm run build
+  ```
+  빌드 결과물은 `dist/` 폴더 내에 생성됩니다.
