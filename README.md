@@ -1,4 +1,4 @@
-# 🖥️ 이수연 님을 위한 개인 맞춤형 글래스모피즘 대시보드 (Personal Dashboard)
+# 🖥️ 이수연 님을 위한 개인 맞춤형 글래스모피즘 대시보드 (Dashboard_Design)
 
 React와 Vite, 그리고 순수 **Vanilla CSS**를 활용해 제작된 프리미엄 개인용 대시보드 웹 애플리케이션입니다.  
 글래스모피즘(Glassmorphism) 스타일의 카드 디자인과 부드러운 그라디언트 로테이션 배경, 그리고 다양한 유틸리티 위젯을 제공합니다.
@@ -56,48 +56,3 @@ React와 Vite, 그리고 순수 **Vanilla CSS**를 활용해 제작된 프리미
   - OpenWeatherMap API (실시간 위치 날씨 조회)
   - Web Audio API (타이머 완료 오디오 합성)
   - Geolocation API (브라우저 내장 위치 감지)
-
----
-
-## 🚀 로컬 실행 방법 (Local Development)
-
-### 1. 패키지 설치
-```bash
-npm install
-```
-
-### 2. 환경 변수 설정
-프로젝트 루트 디렉토리에 `.env.local` 파일을 생성한 후 아래와 같이 API 키 정보를 입력해 주세요.
-```env
-# OpenWeatherMap API Key (날씨 위젯용)
-VITE_OPENWEATHER_API_KEY=your_openweathermap_api_key_here
-
-# Gemini AI API Key (실시간 AI 명언 위젯용)
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-### 3. 로컬 서버 실행
-```bash
-npm run dev
-```
-
----
-
-## 🌐 GitHub Pages 배포 설정 안내
-
-본 프로젝트는 GitHub Actions 또는 직접 빌드 방식을 통해 **GitHub Pages**로 손쉽게 호스팅할 수 있도록 이미 구성되어 있습니다.
-
-- **Vite Base 경로**:  
-  Vite 빌드 시 에셋 경로가 어긋나 404가 발생하는 현상을 방지하기 위해 [vite.config.js](file:///Users/geniusoo/Documents/Dashboard/vite.config.js) 파일의 `base` 경로가 다음과 같이 설정되어 있습니다.
-  ```javascript
-  export default defineConfig({
-    plugins: [react()],
-    base: '/Dashboard/', // GitHub 저장소 이름과 일치시킵니다.
-  })
-  ```
-- **빌드 명령어**:  
-  배포용 정적 파일을 수동 빌드할 경우 아래 명령어를 실행합니다.
-  ```bash
-  npm run build
-  ```
-  빌드 결과물은 `dist/` 폴더 내에 생성됩니다.
