@@ -1,0 +1,195 @@
+.today-focus-card {
+  position: relative;
+  padding: 36px 24px 24px 24px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px; /* 배지가 위로 튀어나오므로 카드 상단 여백 확보 */
+  overflow: visible !important; /* 부모 .glass-card의 overflow: hidden을 우회하여 배지가 위에 보이도록 설정 */
+}
+
+/* Absolute Badge at the top left of the card border */
+.focus-badge {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--accent-purple);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+  z-index: 3;
+}
+
+.focus-content {
+  width: 100%;
+}
+
+/* Empty State */
+.focus-empty-state {
+  cursor: pointer;
+  width: 100%;
+}
+
+.focus-empty-text {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.focus-empty-text span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Task Presenting State */
+.focus-task-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.focus-checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.focus-checkbox.checked {
+  background-color: var(--accent-purple);
+  border-color: var(--accent-purple);
+  color: #ffffff;
+}
+
+.focus-task-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: left;
+  flex-grow: 1;
+  word-break: break-all;
+  transition: all 0.2s ease;
+}
+
+.focus-task-text.line-through {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.focus-actions {
+  display: flex;
+  gap: 6px;
+  opacity: 0; /* 평소에는 숨겼다가 카드 호버 시 표시 */
+  transition: opacity 0.2s ease;
+}
+
+.today-focus-card:hover .focus-actions {
+  opacity: 1;
+}
+
+.focus-action-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.focus-action-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+}
+
+.focus-action-btn.delete:hover {
+  background: rgba(255, 59, 48, 0.15);
+  color: #ff3b30;
+}
+
+/* Form Editing State */
+.focus-form {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.focus-input {
+  flex-grow: 1;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.focus-input:focus {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+.focus-save-btn {
+  border: none;
+  background: var(--text-primary);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.focus-save-btn:hover {
+  background: #1c1c1e;
+  transform: translateY(-1px);
+}
+
+.focus-save-btn:active {
+  transform: translateY(0);
+}
+
+/* Completed Card subtle style change */
+.today-focus-card.completed {
+  border-color: rgba(13, 148, 136, 0.2);
+}
+
+/* Empty Card Hover Pulse */
+.today-focus-card.empty:hover {
+  cursor: pointer;
+}
+.today-focus-card.empty:hover .focus-empty-text span {
+  color: var(--accent-purple);
+  opacity: 1;
+}

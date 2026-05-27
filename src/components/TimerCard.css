@@ -1,0 +1,126 @@
+.timer-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 24px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Background progress indicator */
+.timer-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.15) 100%);
+  z-index: 1;
+  transition: width 1s linear;
+  pointer-events: none;
+}
+
+.timer-info {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.timer-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.timer-display-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.timer-time {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-outfit);
+  letter-spacing: -1px;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timer-btn {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-btn {
+  background-color: #000000;
+  color: #ffffff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn:hover {
+  transform: scale(1.08);
+  background-color: #1a1a1a;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.reset-btn {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.reset-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--text-primary);
+  transform: rotate(-45deg);
+}
+
+.reset-btn:active {
+  transform: scale(0.9);
+}
+
+/* Pulsing effect when running */
+.timer-card.running {
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.15), 
+    0 4px 28px rgba(0, 0, 0, 0.05);
+}
+@keyframes timerPulse {
+  0% {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+.timer-card.running {
+  animation: timerPulse 2s infinite ease-in-out;
+}

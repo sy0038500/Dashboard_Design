@@ -1,0 +1,192 @@
+.todo-card {
+  padding: 22px 24px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.todo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todo-title-icon {
+  color: var(--text-secondary);
+}
+
+.todo-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.todo-stats {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Scrollable area for lists */
+.todo-list-container {
+  flex-grow: 1;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 4px;
+  text-align: left;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.todo-item:last-child {
+  margin-bottom: 0;
+}
+
+.todo-item:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(2px);
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.todo-checkbox.checked {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: #ffffff;
+}
+
+.todo-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex-grow: 1;
+  word-break: break-all;
+  transition: all 0.15s ease;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.todo-delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.todo-item:hover .todo-delete-btn {
+  opacity: 1;
+}
+
+.todo-delete-btn:hover {
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+}
+
+.todo-empty {
+  font-size: 13px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  text-align: center;
+  padding: 30px 0;
+  font-style: italic;
+}
+
+/* Input Form styling */
+.todo-input-form {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.todo-input {
+  flex-grow: 1;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.todo-input:focus {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.todo-add-btn {
+  border: none;
+  background: #2d2a30; /* 피그마 다크 칩 색상 */
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.todo-add-btn:hover {
+  background: #1e1b1f;
+  transform: translateY(-1px);
+}
+
+.todo-add-btn:active {
+  transform: translateY(0);
+}

@@ -1,0 +1,122 @@
+:root {
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-outfit: 'Outfit', var(--font-sans);
+
+  /* Colors */
+  --text-primary: #000000;
+  --text-secondary: #4a4a4a;
+  --text-muted: #8e8e93;
+  --accent-blue: #0184c7;
+  --accent-orange: #ff7f29;
+  
+  /* Glassmorphism settings */
+  --card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
+  --card-border: 1px solid rgba(255, 255, 255, 0.3);
+  --card-shadow: 
+    0 4px 28px rgba(0, 0, 0, 0.05), 
+    3px 10px 30px rgba(0, 0, 0, 0.04);
+  --card-radius: 28px;
+  --card-blur: blur(25px);
+
+  box-sizing: border-box;
+}
+
+/* 🎨 동적 테마 정의 (설정 모달 연동) */
+body.theme-yellow {
+  --accent-purple: #0d9488; /* 에메랄드 청록 */
+  --theme-bg: linear-gradient(135deg, #fef3c7, #fde68a, #fffbeb, #fcd34d);
+}
+
+body.theme-purple {
+  --accent-purple: #903df7; /* 보라색 */
+  --theme-bg: linear-gradient(135deg, #1ea3e3, #ee7ebb, #fad36d);
+}
+
+body.theme-blue {
+  --accent-purple: #38bdf8; /* 청량 스카이 블루 */
+  --theme-bg: linear-gradient(135deg, #0f172a, #0369a1, #0284c7, #38bdf8);
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--theme-bg);
+  background-size: 300% 300%;
+  animation: gradientBG 18s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#root {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glassmorphism Card Utility */
+.glass-card {
+  background: var(--card-bg);
+  border: var(--card-border);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.08), 
+    5px 15px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+

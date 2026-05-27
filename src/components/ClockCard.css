@@ -1,0 +1,224 @@
+.clock-card-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.clock-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px;
+  min-height: 140px;
+}
+
+.clock-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.clock-date.clickable {
+  cursor: pointer;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.clock-date.clickable:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.clock-date.clickable:active {
+  transform: translateY(0);
+}
+
+.clock-time-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-outfit);
+}
+
+.clock-ampm {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.clock-time {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: var(--text-primary);
+}
+
+.clock-seconds {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent-purple);
+  margin-bottom: 10px;
+  opacity: 0.8;
+  width: 24px;
+  text-align: left;
+}
+
+/* 📅 Calendar Dropdown Glassmorphism Styling */
+.calendar-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: 
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  pointer-events: none;
+}
+
+/* 활성화 시 위에서 아래로 미끄러져 내려오며 열림 */
+.calendar-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calendar-current-month {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.calendar-nav-btn {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+.calendar-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.weekday-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.weekday-label.sun {
+  color: #ff5252;
+}
+
+.weekday-label.sat {
+  color: #52a2ff;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.calendar-day.empty {
+  pointer-events: none;
+}
+
+/* 일반 날짜 호버: 강도를 0.18로 낮추고 오늘 날짜(.today)는 흰색 오버레이에서 제외 */
+.calendar-day:not(.empty):not(.today):hover {
+  background: rgba(255, 255, 255, 0.18);
+  cursor: default;
+}
+
+/* 오늘 날짜는 에메랄드 청록 포인트 컬러 원형 배경 처리 */
+.calendar-day.today {
+  background-color: var(--accent-purple);
+  color: #ffffff !important;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 오늘 날짜 마우스 호버: 글씨 가독성을 해치는 흰색 배경 대신 크기와 그림자만 미세하게 확장 */
+.calendar-day.today:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.5);
+  cursor: default;
+}
+
+/* Tablet & Desktop Adjustments */
+@media (min-width: 768px) {
+  .clock-time {
+    font-size: 72px;
+  }
+  .clock-ampm {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  .clock-seconds {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+}
+

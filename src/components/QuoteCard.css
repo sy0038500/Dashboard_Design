@@ -1,0 +1,102 @@
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  min-height: 140px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.quote-icon-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.quote-icon {
+  color: var(--accent-blue);
+  opacity: 0.3;
+  transform: rotate(180deg); /* 피그마의 여는 따옴표 모양에 맞추기 위해 회전 또는 기본 유지 */
+}
+
+.quote-content-wrapper {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.quote-content-wrapper.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote-content-wrapper.fade-out {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.quote-text {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: left;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.quote-author {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-align: right;
+  margin-top: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* Hover effect indicator */
+.quote-card:hover .quote-icon {
+  opacity: 0.6;
+  transform: rotate(180deg) scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* AI Loading Indicator */
+.quote-card.loading-state .quote-content-wrapper {
+  opacity: 0.25;
+  transform: translateY(2px);
+  pointer-events: none;
+}
+
+.quote-ai-loader {
+  position: absolute;
+  bottom: 12px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-purple);
+  border-radius: 50%;
+  animation: pulseLoader 1s infinite alternate;
+}
+
+@keyframes pulseLoader {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
