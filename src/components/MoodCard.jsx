@@ -20,15 +20,7 @@ const FocusIcon = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export default function MoodCard() {
-  const [activeMood, setActiveMood] = useState(() => {
-    return localStorage.getItem('user_mood') || '';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('user_mood', activeMood);
-  }, [activeMood]);
-
+export default function MoodCard({ activeMood, setActiveMood }) {
   const selectMood = (moodName) => {
     if (activeMood === moodName) {
       setActiveMood(''); // 이미 선택된 것을 누르면 취소
@@ -39,11 +31,20 @@ export default function MoodCard() {
 
   return (
     <div className="mood-card glass-card">
-      <h3 className="mood-title">오늘의 기분 입력</h3>
+      <h3 className="mood-title">오늘의 기분/상황 입력</h3>
+      <div className="mood-input-container">
+        <input 
+          type="text" 
+          className="mood-input" 
+          placeholder="예: 지침, 집중, 설렘..." 
+          value={activeMood} 
+          onChange={(e) => setActiveMood(e.target.value)}
+        />
+      </div>
       <div className="mood-options">
         <button
-          className={`mood-btn glass-card ${activeMood === 'peace' ? 'active-peace' : ''}`}
-          onClick={() => selectMood('peace')}
+          className={`mood-btn glass-card ${activeMood === '평온' ? 'active-peace' : ''}`}
+          onClick={() => selectMood('평온')}
           title="평온함"
         >
           <CloudSun className="mood-icon icon-peace" size={24} />
@@ -51,8 +52,8 @@ export default function MoodCard() {
         </button>
 
         <button
-          className={`mood-btn glass-card ${activeMood === 'joy' ? 'active-joy' : ''}`}
-          onClick={() => selectMood('joy')}
+          className={`mood-btn glass-card ${activeMood === '기쁨' ? 'active-joy' : ''}`}
+          onClick={() => selectMood('기쁨')}
           title="기쁨"
         >
           <Sun className="mood-icon icon-joy" size={24} />
@@ -60,8 +61,8 @@ export default function MoodCard() {
         </button>
 
         <button
-          className={`mood-btn glass-card ${activeMood === 'focus' ? 'active-focus' : ''}`}
-          onClick={() => selectMood('focus')}
+          className={`mood-btn glass-card ${activeMood === '몰입' ? 'active-focus' : ''}`}
+          onClick={() => selectMood('몰입')}
           title="몰입"
         >
           <FocusIcon className="mood-icon icon-focus" size={24} />

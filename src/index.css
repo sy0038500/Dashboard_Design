@@ -26,16 +26,78 @@
 body.theme-yellow {
   --accent-purple: #0d9488; /* 에메랄드 청록 */
   --theme-bg: linear-gradient(135deg, #fef3c7, #fde68a, #fffbeb, #fcd34d);
+  --quote-accent: #0d9488;
+  --quote-text: #1f2937;
+  --quote-muted: #4b5563;
 }
 
 body.theme-purple {
   --accent-purple: #903df7; /* 보라색 */
   --theme-bg: linear-gradient(135deg, #1ea3e3, #ee7ebb, #fad36d);
+  --quote-accent: #903df7;
+  --quote-text: #1f2937;
+  --quote-muted: #4b5563;
 }
 
 body.theme-blue {
   --accent-purple: #38bdf8; /* 청량 스카이 블루 */
   --theme-bg: linear-gradient(135deg, #0f172a, #0369a1, #0284c7, #38bdf8);
+  --quote-accent: #7dd3fc;
+  --quote-text: #ffffff;
+  --quote-muted: #e0f2fe;
+}
+
+/* 🎨 감정 기반 추가 테마 */
+body.theme-tired {
+  --accent-purple: #60a5fa; 
+  --theme-bg: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc, #38bdf8);
+  --quote-accent: #0284c7;
+  --quote-text: #0f172a;
+  --quote-muted: #334155;
+}
+
+body.theme-anxious {
+  --accent-purple: #c084fc; 
+  --theme-bg: linear-gradient(135deg, #f3e8ff, #e9d5ff, #d8b4fe, #c084fc);
+  --quote-accent: #9333ea;
+  --quote-text: #1e1b4b;
+  --quote-muted: #4c1d95;
+}
+
+body.theme-happy {
+  --accent-purple: #fb923c; 
+  --theme-bg: linear-gradient(135deg, #ffedd5, #fed7aa, #fdba74, #fb923c);
+  --quote-accent: #ea580c;
+  --quote-text: #431407;
+  --quote-muted: #7c2d12;
+}
+
+body.theme-focus {
+  --accent-purple: #34d399; 
+  --theme-bg: linear-gradient(135deg, #064e3b, #065f46, #047857, #059669);
+  --text-primary: #ffffff; /* 어두운 배경 대비 */
+  --text-secondary: #e2e8f0;
+  --quote-accent: #6ee7b7;
+  --quote-text: #ffffff;
+  --quote-muted: #d1fae5;
+}
+
+body.theme-lethargic {
+  --accent-purple: #818cf8; 
+  --theme-bg: linear-gradient(135deg, #1e1b4b, #312e81, #3730a3, #4338ca);
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --quote-accent: #a5b4fc;
+  --quote-text: #ffffff;
+  --quote-muted: #e0e7ff;
+}
+
+body.theme-creative {
+  --accent-purple: #f472b6; 
+  --theme-bg: linear-gradient(135deg, #fce7f3, #fbcfe8, #f9a8d4, #f472b6);
+  --quote-accent: #db2777;
+  --quote-text: #831843;
+  --quote-muted: #9d174d;
 }
 
 *, *::before, *::after {
@@ -57,6 +119,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.6s ease-in-out, color 0.6s ease-in-out;
 }
 
 @keyframes gradientBG {

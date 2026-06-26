@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Check, Edit2, Trash2, Plus } from 'lucide-react';
 import './TodayFocusCard.css';
 
-export default function TodayFocusCard() {
-  const [focusItem, setFocusItem] = useState(() => {
-    return localStorage.getItem('today_focus') || '';
-  });
+export default function TodayFocusCard({ todayFocus, setTodayFocus }) {
   const [isCompleted, setIsCompleted] = useState(() => {
     return localStorage.getItem('today_focus_completed') === 'true';
   });
   const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(focusItem);
+  const [inputValue, setInputValue] = useState(todayFocus || '');
 
   useEffect(() => {
-    localStorage.setItem('today_focus', focusItem);
-  }, [focusItem]);
+    // todayFocus prop이 외부에서 변경되면 inputValue도 동기화
+    if (!isEditing) {
+      setInputValue(todayFocus || '');
+    }
+  }, [todayFocus, isEditing]);
 
   useEffect(() => {
     localStorage.setItem('today_focus_completed', isCompleted);
@@ -23,7 +23,7 @@ export default function TodayFocusCard() {
   const handleSave = (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      setFocusItem(inputValue.trim());
+      setTodayFocus(inputValue.trim());
       setIsCompleted(false);
       setIsEditing(false);
     }
@@ -31,25 +31,25 @@ export default function TodayFocusCard() {
 
   const handleEdit = (e) => {
     e.stopPropagation(); // 카드 클릭 이벤트 전파 방지
-    setInputValue(focusItem);
+    setInputValue(todayFocus);
     setIsEditing(true);
   };
 
   const handleDelete = (e) => {
     e.stopPropagation(); // 카드 클릭 이벤트 전파 방지
-    setFocusItem('');
+    setTodayFocus('');
     setIsCompleted(false);
     setInputValue('');
   };
 
   const toggleComplete = () => {
-    if (!isEditing && focusItem) {
+    if (!isEditing && todayFocus) {
       setIsCompleted(!isCompleted);
     }
   };
 
   return (
-    <div className={`today-focus-card glass-card ${isCompleted ? 'completed' : ''} ${!focusItem ? 'empty' : ''}`} onClick={toggleComplete}>
+    <div className={`today-focus-card glass-card ${isCompleted ? 'completed' : ''} ${!todayFocus ? 'empty' : ''}`} onClick={toggleComplete}>
       {/* Absolute Badge */}
       <div className="focus-badge">TODAY FOCUS</div>
 
@@ -68,13 +68,13 @@ export default function TodayFocusCard() {
         </form>
       ) : (
         <div className="focus-content">
-          {focusItem ? (
+          {todayFocus ? (
             <div className="focus-task-row">
               <div className={`focus-checkbox ${isCompleted ? 'checked' : ''}`}>
                 {isCompleted && <Check size={14} className="check-icon" />}
               </div>
               <span className={`focus-task-text ${isCompleted ? 'line-through' : ''}`}>
-                {focusItem}
+                {todayFocus}
               </span>
               <div className="focus-actions">
                 <button className="focus-action-btn edit" onClick={handleEdit} title="수정">

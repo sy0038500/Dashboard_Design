@@ -11,46 +11,104 @@ import TodoCard from './components/TodoCard';
 import MemoCard from './components/MemoCard';
 import './App.css';
 
+const getQuickThemeFromMood = (text = '') => {
+  const value = text.toLowerCase().replace(/\s/g, '');
+
+  if (!value) return 'yellow';
+
+  const themeRules = [
+    {
+      theme: 'tired',
+      words: ['힘', '지침', '지쳐', '지친', '피곤', '버겁', '멘탈', '녹초', '고단', '탈진']
+    },
+    {
+      theme: 'anxious',
+      words: ['불안', '걱정', '초조', '긴장', '무섭', '떨려', '압박', '스트레스']
+    },
+    {
+      theme: 'happy',
+      words: ['기쁨', '행복', '좋', '신나', '즐거', '뿌듯', '상쾌', '개운']
+    },
+    {
+      theme: 'focus',
+      words: ['집중', '공부', '몰입', '과제', '시험', '작업', '마감', '해야', '할일', '코딩']
+    },
+    {
+      theme: 'lethargic',
+      words: ['무기력', '우울', '아무것도', '하기싫', '귀찮', '현타', '울적']
+    },
+    {
+      theme: 'creative',
+      words: ['설렘', '기대', '창의', '아이디어', '두근', '새로운']
+    }
+  ];
+
+  const matched = themeRules.find((rule) =>
+    rule.words.some((word) => value.includes(word))
+  );
+
+  return matched ? matched.theme : 'yellow';
+};
+
 export default function App() {
-  // 1. 위젯 활성화 상태 관리 (localStorage 동기화)
   const [activeWidgets, setActiveWidgets] = useState(() => {
     const saved = localStorage.getItem('dashboard_active_widgets');
-    return saved ? JSON.parse(saved) : {
-      clock: true,
-      timer: true,
-      todayFocus: true,
-      quote: true,
-      dday: true,
-      mood: true,
-      todo: true,
-      memo: true
-    };
+    return saved
+      ? JSON.parse(saved)
+      : {
+          clock: true,
+          timer: true,
+          todayFocus: true,
+          quote: true,
+          dday: true,
+          mood: true,
+          todo: true,
+          memo: true
+        };
   });
 
-  // 2. 위젯 크기(너비 span) 상태 관리 (localStorage 동기화)
   const [widgetSizes, setWidgetSizes] = useState(() => {
     const saved = localStorage.getItem('dashboard_widget_sizes');
-    return saved ? JSON.parse(saved) : {
-      clock: 1,
-      timer: 1,
-      todayFocus: 1,
-      quote: 1,
-      dday: 1,
-      mood: 1,
-      todo: 1,
-      memo: 1
-    };
+    return saved
+      ? JSON.parse(saved)
+      : {
+          clock: 1,
+          timer: 1,
+          todayFocus: 1,
+          quote: 1,
+          dday: 1,
+          mood: 1,
+          todo: 1,
+          memo: 1
+        };
   });
 
-  // 3. 테마 상태 관리 (기본값: yellow)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('dashboard_theme') || 'yellow';
+    return localStorage.getItem('dashboard_theme') || 'auto';
   });
 
-  // 4. 레이아웃 편집 모드 활성화 여부
   const [isEditMode, setIsEditMode] = useState(false);
 
-  // 로컬 스토리지 자동 저장
+  const [activeMood, setActiveMood] = useState(() => {
+    return localStorage.getItem('user_mood') || '';
+  });
+
+  const [todayFocus, setTodayFocus] = useState(() => {
+    return localStorage.getItem('today_focus') || '';
+  });
+
+  const [globalWeather, setGlobalWeather] = useState('');
+
+  const [autoThemeKey, setAutoThemeKey] = useState(() => {
+    const saved = localStorage.getItem('dashboard_auto_theme_key');
+
+    if (!saved || saved === 'undefined' || saved === 'null' || saved === 'lemonYellow') {
+      return 'yellow';
+    }
+
+    return saved;
+  });
+
   useEffect(() => {
     localStorage.setItem('dashboard_active_widgets', JSON.stringify(activeWidgets));
   }, [activeWidgets]);
@@ -60,10 +118,32 @@ export default function App() {
   }, [widgetSizes]);
 
   useEffect(() => {
+    localStorage.setItem('user_mood', activeMood);
+  }, [activeMood]);
+
+  useEffect(() => {
+    localStorage.setItem('today_focus', todayFocus);
+  }, [todayFocus]);
+
+  useEffect(() => {
+    localStorage.setItem('dashboard_auto_theme_key', autoThemeKey);
+  }, [autoThemeKey]);
+
+  useEffect(() => {
     localStorage.setItem('dashboard_theme', theme);
-    // body 태그 클래스에 테마 바인딩
-    document.body.className = `theme-${theme}`;
   }, [theme]);
+
+  useEffect(() => {
+    if (theme !== 'auto') return;
+
+    const quickTheme = getQuickThemeFromMood(activeMood);
+    setAutoThemeKey(quickTheme);
+  }, [activeMood, theme]);
+
+  useEffect(() => {
+    const appliedTheme = theme === 'auto' ? autoThemeKey : theme;
+    document.body.className = `theme-${appliedTheme}`;
+  }, [theme, autoThemeKey]);
 
   const toggleWidget = (key) => {
     setActiveWidgets((prev) => ({
@@ -80,23 +160,42 @@ export default function App() {
   };
 
   const toggleEditMode = () => {
-    setIsEditMode(!isEditMode);
+    setIsEditMode((prev) => !prev);
   };
 
   const changeTheme = (newTheme) => {
     setTheme(newTheme);
   };
 
-  // 위젯 래퍼 생성기 (편집 모드 오버레이 포함)
   const renderWidget = (key, Component) => {
     if (!activeWidgets[key]) return null;
 
-    const spanSize = widgetSizes[key]; // 1, 2, 3
+    const spanSize = widgetSizes[key];
     const sizeClass = `span-${spanSize}`;
+
+    const getWidgetProps = () => {
+      switch (key) {
+        case 'mood':
+          return { activeMood, setActiveMood };
+
+        case 'quote':
+          return {
+            activeMood,
+            globalWeather,
+            todayFocus,
+            onAiThemeDetermined: setAutoThemeKey
+          };
+
+        case 'todayFocus':
+          return { todayFocus, setTodayFocus };
+
+        default:
+          return {};
+      }
+    };
 
     return (
       <div className={`widget-container ${sizeClass} ${isEditMode ? 'edit-active' : ''}`}>
-        {/* 레이아웃 편집용 오버레이 조작 바 */}
         {isEditMode && (
           <div className="widget-size-control">
             <span className="control-label">너비 조절</span>
@@ -113,17 +212,16 @@ export default function App() {
             </div>
           </div>
         )}
-        <Component />
+
+        <Component {...getWidgetProps()} />
       </div>
     );
   };
 
   return (
     <div className="dashboard-container">
-      {/* 상단 칩 헤더 */}
-      <Header />
+      <Header setGlobalWeather={setGlobalWeather} />
 
-      {/* 대시보드 플랫 그리드 영역 */}
       <main className={`dashboard-grid ${isEditMode ? 'grid-editing' : ''}`}>
         {renderWidget('clock', ClockCard)}
         {renderWidget('quote', QuoteCard)}
@@ -135,7 +233,6 @@ export default function App() {
         {renderWidget('memo', MemoCard)}
       </main>
 
-      {/* 🛠️ 위젯/레이아웃/설정 관리 패널 (하단 배치) */}
       <ControlPanel
         activeWidgets={activeWidgets}
         toggleWidget={toggleWidget}
@@ -147,4 +244,3 @@ export default function App() {
     </div>
   );
 }
-

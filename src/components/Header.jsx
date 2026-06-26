@@ -84,7 +84,7 @@ const getMockWeatherBySeason = () => {
   return '3°C 구름 조금 쌀쌀함';
 };
 
-export default function Header() {
+export default function Header({ setGlobalWeather }) {
   const [locationName, setLocationName] = useState('경기도 수원시');
   const [weatherDescription, setWeatherDescription] = useState('25°C 맑음');
   const [isLoading, setIsLoading] = useState(true);
@@ -106,6 +106,7 @@ export default function Header() {
       
       setLocationName(mappedLocation);
       setWeatherDescription(mockWeather);
+      if (setGlobalWeather) setGlobalWeather(mockWeather);
       setIsLoading(false);
       return;
     }
@@ -132,6 +133,7 @@ export default function Header() {
       
       setLocationName(translated);
       setWeatherDescription(resultWeather);
+      if (setGlobalWeather) setGlobalWeather(resultWeather);
     } catch (err) {
       console.error('❌ Real Weather API 호출 실패:', err);
       console.warn('⚠️ API 오류로 인해 Fallback 모드로 복구합니다.');
@@ -143,6 +145,7 @@ export default function Header() {
       
       setLocationName(mappedLocation);
       setWeatherDescription(mockWeather);
+      if (setGlobalWeather) setGlobalWeather(mockWeather);
     } finally {
       console.groupEnd();
       setIsLoading(false);

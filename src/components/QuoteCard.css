@@ -15,8 +15,8 @@
 }
 
 .quote-icon {
-  color: var(--accent-blue);
-  opacity: 0.3;
+  color: var(--quote-accent);
+  opacity: 0.4;
   transform: rotate(180deg); /* 피그마의 여는 따옴표 모양에 맞추기 위해 회전 또는 기본 유지 */
 }
 
@@ -38,7 +38,7 @@
   font-size: 15px;
   line-height: 1.6;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--quote-text);
   text-align: left;
   margin: 0;
   word-break: keep-all;
@@ -47,7 +47,7 @@
 .quote-author {
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent-blue);
+  color: var(--quote-muted);
   text-align: right;
   margin-top: 14px;
   letter-spacing: 0.5px;
@@ -76,7 +76,7 @@
   gap: 8px;
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent-purple);
+  color: var(--quote-accent);
   opacity: 0.8;
   pointer-events: none;
 }
@@ -84,7 +84,7 @@
 .pulse-dot {
   width: 6px;
   height: 6px;
-  background-color: var(--accent-purple);
+  background-color: var(--quote-accent);
   border-radius: 50%;
   animation: pulseLoader 1s infinite alternate;
 }

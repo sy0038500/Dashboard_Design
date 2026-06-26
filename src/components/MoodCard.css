@@ -10,9 +10,39 @@
   font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   text-align: center;
   letter-spacing: -0.2px;
+}
+
+.mood-input-container {
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.mood-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.mood-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.mood-input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .mood-options {

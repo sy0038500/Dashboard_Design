@@ -230,6 +230,18 @@
   background: linear-gradient(135deg, #0f172a, #0369a1, #0284c7, #38bdf8);
 }
 
+.tired-preview { background: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc, #38bdf8); }
+.anxious-preview { background: linear-gradient(135deg, #f3e8ff, #e9d5ff, #d8b4fe, #c084fc); }
+.happy-preview { background: linear-gradient(135deg, #ffedd5, #fed7aa, #fdba74, #fb923c); }
+.focus-preview { background: linear-gradient(135deg, #064e3b, #065f46, #047857, #059669); }
+.lethargic-preview { background: linear-gradient(135deg, #1e1b4b, #312e81, #3730a3, #4338ca); }
+.creative-preview { background: linear-gradient(135deg, #fce7f3, #fbcfe8, #f9a8d4, #f472b6); }
+.auto-preview {
+  background: linear-gradient(135deg, #a78bfa, #f472b6, #fb923c, #fde047);
+  background-size: 200% 200%;
+  animation: gradientBG 3s ease infinite;
+}
+
 .theme-select-btn span {
   font-size: 11px;
   font-weight: 700;

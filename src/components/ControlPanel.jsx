@@ -112,6 +112,15 @@ export default function ControlPanel({
               <h4 className="setting-section-title">배경 그라디언트 테마</h4>
               <div className="theme-selector-grid">
                 <button 
+                  className={`theme-select-btn theme-auto ${currentTheme === 'auto' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('auto')}
+                  style={{ gridColumn: '1 / -1', background: 'linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05))', marginBottom: '8px' }}
+                >
+                  <div className="theme-preview auto-preview"></div>
+                  <span>✨ 감정 기반 자동 테마 (Auto)</span>
+                </button>
+
+                <button 
                   className={`theme-select-btn theme-yellow ${currentTheme === 'yellow' ? 'selected' : ''}`}
                   onClick={() => changeTheme('yellow')}
                 >
@@ -133,6 +142,54 @@ export default function ControlPanel({
                 >
                   <div className="theme-preview blue-preview"></div>
                   <span>Deep Ocean</span>
+                </button>
+
+                <button 
+                  className={`theme-select-btn theme-tired ${currentTheme === 'tired' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('tired')}
+                >
+                  <div className="theme-preview tired-preview"></div>
+                  <span>Calm Blue</span>
+                </button>
+
+                <button 
+                  className={`theme-select-btn theme-anxious ${currentTheme === 'anxious' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('anxious')}
+                >
+                  <div className="theme-preview anxious-preview"></div>
+                  <span>Lavender</span>
+                </button>
+
+                <button 
+                  className={`theme-select-btn theme-happy ${currentTheme === 'happy' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('happy')}
+                >
+                  <div className="theme-preview happy-preview"></div>
+                  <span>Sunny Orange</span>
+                </button>
+
+                <button 
+                  className={`theme-select-btn theme-focus ${currentTheme === 'focus' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('focus')}
+                >
+                  <div className="theme-preview focus-preview"></div>
+                  <span>Deep Green</span>
+                </button>
+
+                <button 
+                  className={`theme-select-btn theme-lethargic ${currentTheme === 'lethargic' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('lethargic')}
+                >
+                  <div className="theme-preview lethargic-preview"></div>
+                  <span>Midnight</span>
+                </button>
+
+                <button 
+                  className={`theme-select-btn theme-creative ${currentTheme === 'creative' ? 'selected' : ''}`}
+                  onClick={() => changeTheme('creative')}
+                >
+                  <div className="theme-preview creative-preview"></div>
+                  <span>Pink Pop</span>
                 </button>
               </div>
             </div>

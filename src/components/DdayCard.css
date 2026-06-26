@@ -102,3 +102,419 @@
   transform: scale(1.03);
   transition: all 0.2s ease;
 }
+
+.dday-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.dday-edit-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text-primary, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.dday-edit-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.dday-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+}
+
+.dday-modal {
+  width: min(620px, 100%);
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+}
+
+.dday-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dday-modal-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.dday-modal-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+}
+
+.dday-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dday-goal-form {
+  display: grid;
+  grid-template-columns: 1fr 180px 44px;
+  gap: 10px;
+  align-items: center;
+  padding: 18px 20px !important;
+}
+
+.dday-input {
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0 14px;
+  background: rgba(255,255,255,0.08);
+  color: inherit;
+  outline: none;
+}
+
+.dday-input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.dday-delete-btn,
+.dday-add-btn,
+.dday-cancel-btn,
+.dday-save-btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.dday-delete-btn {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+}
+
+.dday-add-btn {
+  margin-top: 8px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dday-modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dday-cancel-btn,
+.dday-save-btn {
+  min-width: 90px;
+  height: 44px;
+  padding: 0 18px;
+}
+
+.dday-cancel-btn {
+  background: rgba(255,255,255,0.12);
+  color: inherit;
+}
+
+.dday-save-btn {
+  background: #111;
+  color: #fff;
+}
+
+/* D-day 편집 모달 레이아웃 재정리 */
+.dday-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.dday-modal {
+  width: min(760px, 92vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 34px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.dday-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.dday-modal-header h3 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.dday-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* 기존 grid 충돌 방지 */
+.dday-goal-form {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* 제목 / 날짜 / 삭제 버튼 */
+.dday-form-top {
+  display: grid;
+  grid-template-columns: 1.4fr 190px 46px;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 18px !important;
+}
+
+.dday-input {
+  width: 100%;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  font-size: 15px;
+  outline: none;
+}
+
+/* 색상 선택 영역 */
+.dday-color-editor {
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding-top: 4px !important;
+}
+
+.dday-color-label {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.dday-color-input {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dday-color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.dday-color-input::-webkit-color-swatch {
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+}
+
+.dday-color-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dday-color-chip {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+}
+
+.dday-color-chip.selected {
+  border: 3px solid #fff;
+  transform: scale(1.12);
+}
+
+.dday-delete-btn {
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+  cursor: pointer;
+}
+
+.dday-add-btn {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dday-modal-footer {
+  margin-top: 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.dday-cancel-btn,
+.dday-save-btn {
+  min-width: 100px;
+  height: 48px;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dday-cancel-btn {
+  background: rgba(255, 255, 255, 0.16);
+  color: inherit;
+}
+
+.dday-save-btn {
+  background: #111;
+  color: #fff;
+}
+
+/* D-day 모달 간격 컴팩트 조정 */
+.dday-modal {
+  width: min(680px, 88vw);
+  padding: 28px 32px;
+  border-radius: 28px;
+}
+
+.dday-modal-header {
+  margin-bottom: 18px;
+}
+
+.dday-modal-header h3 {
+  font-size: 26px;
+}
+
+.dday-modal-body {
+  gap: 12px;
+}
+
+.dday-goal-form {
+  padding: 14px 16px;
+  border-radius: 20px;
+}
+
+.dday-form-top {
+  display: grid;
+  grid-template-columns: 1fr 170px 42px;
+  gap: 10px;
+  align-items: center;
+}
+
+.dday-input {
+  height: 44px;
+  padding: 0 14px;
+  font-size: 14px;
+  border-radius: 14px;
+}
+
+.dday-delete-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+}
+
+.dday-color-editor {
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.dday-color-list {
+  display: flex;
+  align-items: center;
+  gap: 10px !important;
+  flex-wrap: wrap;
+}
+
+.dday-color-chip {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+}
+
+.dday-color-chip.selected {
+  transform: scale(1.08);
+}
+
+.dday-add-btn {
+  height: 46px;
+  margin-top: 2px;
+  border-radius: 16px;
+}
+
+.dday-modal-footer {
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.dday-cancel-btn,
+.dday-save-btn {
+  min-width: 88px;
+  height: 44px;
+  border-radius: 15px;
+}
