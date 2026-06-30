@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Sun, User, LogOut, CloudSun } from 'lucide-react';
+import { MapPin, Sun, User, LogOut, CloudSun, Pencil, X } from 'lucide-react';
 import './Header.css';
 
 // 영문 도시명 한글 매핑 딕셔너리
@@ -88,6 +88,12 @@ export default function Header({ setGlobalWeather }) {
   const [locationName, setLocationName] = useState('경기도 수원시');
   const [weatherDescription, setWeatherDescription] = useState('25°C 맑음');
   const [isLoading, setIsLoading] = useState(true);
+  const [nickname, setNickname] = useState(() => {
+    return localStorage.getItem('dashboard_nickname') || '이수연';
+  });
+
+  const [isNameModalOpen, setIsNameModalOpen] = useState(false);
+  const [draftNickname, setDraftNickname] = useState(nickname);
 
   const fetchWeatherData = async (lat, lon) => {
     const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -177,13 +183,36 @@ export default function Header({ setGlobalWeather }) {
     alert('로그아웃 되었습니다.');
   };
 
-  return (
+  const openNameModal = () => {
+    setDraftNickname(nickname);
+    setIsNameModalOpen(true);
+  };
+
+  const closeNameModal = () => {
+    setIsNameModalOpen(false);
+  };
+
+  const saveNickname = () => {
+    const trimmedName = draftNickname.trim();
+
+    if (!trimmedName) {
+      alert('닉네임을 입력해주세요.');
+      return;
+    }
+
+    setNickname(trimmedName);
+    localStorage.setItem('dashboard_nickname', trimmedName);
+    setIsNameModalOpen(false);
+  };
+
+return (
+  <>
     <header className="dashboard-header">
       <div className="header-chip glass-card" title={isLoading ? "위치 조회 중..." : locationName}>
         <MapPin className="chip-icon icon-blue animate-pulse" size={16} />
         <span className="chip-text">{isLoading ? "조회 중..." : locationName}</span>
       </div>
-      
+
       <div className="header-chip glass-card" title={isLoading ? "날씨 조회 중..." : weatherDescription}>
         {weatherDescription.includes('맑음') ? (
           <Sun className="chip-icon icon-orange" size={16} />
@@ -192,16 +221,59 @@ export default function Header({ setGlobalWeather }) {
         )}
         <span className="chip-text">{isLoading ? "조회 중..." : weatherDescription}</span>
       </div>
-      
-      <div className="header-chip glass-card">
+
+      <button
+        className="header-chip glass-card clickable"
+        onClick={openNameModal}
+        title="닉네임 수정"
+      >
         <User className="chip-icon icon-blue" size={16} />
-        <span className="chip-text">이수연 님</span>
-      </div>
-      
+        <span className="chip-text">{nickname} 님</span>
+        <Pencil className="chip-icon icon-dark" size={13} />
+      </button>
+
       <button className="header-chip glass-card clickable" onClick={handleLogout}>
         <LogOut className="chip-icon icon-dark" size={16} />
         <span className="chip-text">로그아웃</span>
       </button>
     </header>
-  );
+
+    {isNameModalOpen && (
+      <div className="nickname-modal-overlay" onClick={closeNameModal}>
+        <div className="nickname-modal glass-card" onClick={(e) => e.stopPropagation()}>
+          <div className="nickname-modal-header">
+            <h3>닉네임 수정</h3>
+
+            <button className="nickname-close-btn" onClick={closeNameModal}>
+              <X size={18} />
+            </button>
+          </div>
+
+          <p className="nickname-modal-desc">
+            대시보드 상단에 표시될 이름을 입력해주세요.
+          </p>
+
+          <input
+            className="nickname-input"
+            value={draftNickname}
+            onChange={(e) => setDraftNickname(e.target.value)}
+            placeholder="닉네임 입력"
+            maxLength={12}
+            autoFocus
+          />
+
+          <div className="nickname-modal-footer">
+            <button className="nickname-cancel-btn" onClick={closeNameModal}>
+              취소
+            </button>
+
+            <button className="nickname-save-btn" onClick={saveNickname}>
+              저장
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </>
+);
 }
