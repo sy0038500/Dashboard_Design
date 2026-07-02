@@ -114,6 +114,13 @@ export default function DdayCard() {
   };
 
   const handleDeleteGoal = (id) => {
+    const targetGoal = draftGoals.find((goal) => goal.id === id);
+    const isConfirmed = window.confirm(
+      `"${targetGoal?.title || '이 목표'}"를 삭제할까요?`
+    );
+
+    if (!isConfirmed) return;
+
     setDraftGoals((prev) => prev.filter((goal) => goal.id !== id));
   };
 
@@ -185,7 +192,7 @@ export default function DdayCard() {
             <div className="dday-modal-header">
               <h3>D-day 목표 관리</h3>
               <button className="dday-modal-close" onClick={closeEditor}>
-                <X size={18} />
+                <X size={24} />
               </button>
             </div>
 
@@ -213,9 +220,10 @@ export default function DdayCard() {
                     />
 
                     <button
-                      className="dday-delete-btn"
+                      type="button"
+                      className="dday-goal-delete-btn"
                       onClick={() => handleDeleteGoal(goal.id)}
-                      title="삭제"
+                      title="이 목표 삭제"
                     >
                       <Trash2 size={16} />
                     </button>
